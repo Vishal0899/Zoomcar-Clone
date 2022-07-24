@@ -6,9 +6,6 @@ import { Promo } from "./Promo";
 import { Offers } from "./Offers";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { SelectCityAndCountry } from "../SelectCityAndCountry/SelectCityAndCountry";
-import { useEffect } from "react";
-
 export const HomePage = () => {
   let navigate = useNavigate();
   const Country = useSelector((state) => state.CCreducer.Country);
@@ -25,12 +22,12 @@ export const HomePage = () => {
           <Box style={{ position: "relative"}}>
             <Box>
               <Image
-                src="https://as2.ftcdn.net/v2/jpg/03/19/09/05/1000_F_319090537_bZ9Nm7GvQP5LXcJi5Fam1P8gj8dWz1TQ.jpg"
+                src="https://www.zoomcar.com/img/bg-desktop.png"
                 w={"100%"}
-                h="580px"
+                h="610px"
               />
             </Box>
-            <FormControl w={"40%"} position={"absolute"} top="30%" left={"54%"}>
+            <FormControl w={"40%"} position={"absolute"} top="65%" left={"30%"}>
               <Flex onClick={() => navigate("/CityAndCountry")}>
                 <Box textAlign="left" fontSize="larger" mb={"5px"} mr={"5px"}>
                   Round Trip
@@ -52,6 +49,7 @@ export const HomePage = () => {
                 w={"full"}
                 onClick={() => navigate("/DateAndTime")}
                 mb={2}
+                border={"1px solid grey"}
               >
                 {DateTime.sDateAndTime == "" ? "Choose Trip Dates" : `${DateTime.sDateAndTime} ------->  ${DateTime.rDateAndTime}`}
               </Button>
@@ -81,3 +79,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+

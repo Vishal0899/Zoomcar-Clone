@@ -9,7 +9,6 @@ export const Promo = () => {
           templateRows="repeat(2, 1fr)"
           templateColumns="repeat(2, 1fr)"
           gap={4}
-        //   border="1px solid red"
         >
           <GridItem >
             <a>
