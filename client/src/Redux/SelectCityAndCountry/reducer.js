@@ -17,8 +17,6 @@ export const CCreducer = (state = initState, action) => {
     case "LChange":
       return {
         ...state,
-        Country: action.payload.Country,
-        City: action.payload.City,
         address: action.payload.address,
       };
     default:

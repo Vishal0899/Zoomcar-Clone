@@ -13,11 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { CCaction } from "../../Redux/selectCC/action";
+import { CCaction } from "../../Redux/SelectCityAndCountry/action";
 import { useDispatch } from "react-redux";
 
-
-export const SelectCC = () => {
+export const SelectCityAndCountry = () => {
   return (
     <div>
       <TransitionExample />
@@ -26,21 +25,21 @@ export const SelectCC = () => {
 };
 
 const TransitionExample = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure({defaultIsOpen:true});
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const navigate = useNavigate();
   const [Country, setCountry] = useState("");
   const [City, setCity] = useState("");
   const dispatch = useDispatch();
- 
+
   const handleSubmit = () => {
     const payload = {
       Country,
       City,
     };
     dispatch(CCaction(payload));
-    navigate("/")
+    navigate("/");
   };
-  
+
   return (
     <>
       {/* <Button ml="45%" mt="10%" onClick={onOpen}>
