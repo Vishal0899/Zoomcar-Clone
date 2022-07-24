@@ -28,7 +28,7 @@ export const Promo = () => {
           </GridItem>
           <GridItem >
             <a>
-              <Image src="https://zoomcar-assets.zoomcar.com/pictures/original/7dbd2ac8d24836ba1e1192c6ea94ed0670bdd417.png?1655468204" borderRadius='10px' h='100%'/>
+              <Image src="https://zoomcar-assets.zoomcar.com/pictures/original/55c3970a33c8f4d10dd3c9ace39d20e32af5c8ba.jpg?1651758755" borderRadius='10px' h='100%'/>
             </a>
           </GridItem>
         </Grid>

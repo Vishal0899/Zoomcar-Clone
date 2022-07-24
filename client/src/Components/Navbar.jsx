@@ -46,7 +46,7 @@ export const Navbar = () => {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <PlacementExample />
+              <Hamburger />
             </Box>
             <Box onClick={() => navigate("/")}>
               <Image src={ZoomCarLogo} />
@@ -54,13 +54,14 @@ export const Navbar = () => {
           </HStack>
           <Flex
             w={500}
-            mr={3}
+            mr={10}
             justifyContent="space-between"
             alignItems={"center"}
           >
             <Box>
               <Button
-                fontSize={"xl"}
+                fontSize={"larger"}
+                fontWeight={"bold"}
                 color={"white"}
                 textDecoration={"none"}
                 variant={"link"}
@@ -70,7 +71,8 @@ export const Navbar = () => {
             </Box>
             <Box>
               <Button
-                fontSize={"xl"}
+                fontSize={"larger"}
+                fontWeight={"bold"}
                 color={"white"}
                 textDecoration={"none"}
                 variant={"link"}
@@ -81,7 +83,8 @@ export const Navbar = () => {
             <Flex w={140} justifyContent={"space-between"}>
               <Box>
                 <Button
-                  fontSize={"xl"}
+                  fontSize={"larger"}
+                  fontWeight={"bold"}
                   mt={1}
                   mr={2}
                   color={"white"}
@@ -89,16 +92,16 @@ export const Navbar = () => {
                   variant={"link"}
                   onClick={() => navigate("/login")}
                 >
-                  {isAuth ? "Vishal Pokale" : "Login/Register"}
+                  {isAuth ? "Vishal Pokale" : "Login/Signup"}
                 </Button>
               </Box>
               <Box>
-                <Avatar
+                {isAuth ? <Avatar
                   size={"sm"}
                   src={
                     "https://www.shutterstock.com/image-illustration/white-profile-icon-app-logo-blue-1932531338"
                   }
-                />
+                /> : ""}
               </Box>
             </Flex>
           </Flex>
@@ -108,11 +111,11 @@ export const Navbar = () => {
   );
 };
 
-function PlacementExample() {
+function Hamburger() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.AuthReducer.auth);
-  const city = useSelector(state => state.CCreducer.City)
+  const city = useSelector((state) => state.CCreducer.City);
 
   return (
     <>
@@ -126,9 +129,14 @@ function PlacementExample() {
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px" bg="black">
             {!isAuth ? (
-              <Box color={"white"} onClick={() => {
-                navigate("/login")
-              }}>Login/Register</Box>
+              <Box
+                color={"white"}
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login/Register
+              </Box>
             ) : (
               <Box>
                 <Box fontWeight="bold" color="white">
@@ -138,7 +146,7 @@ function PlacementExample() {
                   vishal@gmail.com
                 </Box>
                 <Box fontSize="md" color="#a5a3a3">
-                  9876543212
+                  7040241422
                 </Box>
               </Box>
             )}
