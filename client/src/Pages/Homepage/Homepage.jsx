@@ -10,7 +10,7 @@ export const HomePage = () => {
   let navigate = useNavigate();
   const Country = useSelector((state) => state.CCreducer.Country);
   const City = useSelector((state) => state.CCreducer.City);
-  const address = useSelector((state) => state.CCreducer.address);
+  const address = useSelector((state) => state.Lreducer.address);
   const DateTime = useSelector((state) => state.DTreducer);
 
   return (

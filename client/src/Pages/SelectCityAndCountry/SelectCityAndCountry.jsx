@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { CCaction } from "../../Redux/SelectCityAndCountry/action";
+import { CCaction } from "../../Redux/SelectCityAndCountryR/action";
 import { useDispatch } from "react-redux";
 
 export const SelectCityAndCountry = () => {

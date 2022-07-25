@@ -6,7 +6,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { Laction } from "../../Redux/SelectCityAndCountry/action";
+import { Laction } from "../../Redux/SelectLocationR/action";
 
 export const SearchLocation = () => {
   let navigate = useNavigate();

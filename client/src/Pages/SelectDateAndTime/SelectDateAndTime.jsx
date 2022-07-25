@@ -25,6 +25,9 @@ export const SelectDateAndTime = () => {
     navigate("/");
   };
 
+  let date = new Date().toLocaleDateString("en-GB").split("/").reverse().join("-");
+  // console.log(date);
+
   return (
     <>
       <Box>
@@ -59,8 +62,9 @@ export const SelectDateAndTime = () => {
                 <Box style={{marginBottom : "10px", marginTop : "10px"}}>Start Date</Box>
                 <Box style={{marginBottom : "10px", marginTop : "10px"}}>
                   <input
-                    type="text"
+                    type="date"
                     placeholder="Year-Day-Month"
+                    min={date}
                     onChange={(e) => setSDate(e.target.value)}
                   />
                 </Box>
@@ -69,8 +73,8 @@ export const SelectDateAndTime = () => {
                 <Box style={{marginBottom : "10px", marginTop : "10px"}}>Pick Up Time</Box>
                 <Box style={{marginBottom : "10px", marginTop : "10px"}}>
                   <input
-                    type="text"
-                    placeholder="00.00 PM"
+                    type="time"
+                    placeholder=""
                     onChange={(e) => setSTime(e.target.value)}
                   />
                 </Box>
@@ -81,8 +85,9 @@ export const SelectDateAndTime = () => {
                 <Box style={{marginBottom : "10px", marginTop : "10px"}}>Return Date</Box>
                 <Box style={{marginBottom : "10px", marginTop : "10px"}}>
                   <input
-                    type="text"
-                    placeholder="Year-Day-Month"
+                    type="date"
+                    placeholder=""
+                    min={sDate}
                     onChange={(e) => setRDate(e.target.value)}
                   />
                 </Box>
@@ -91,8 +96,8 @@ export const SelectDateAndTime = () => {
                 <Box style={{marginBottom : "10px", marginTop : "10px"}}>Drop Off Time</Box>
                 <Box style={{marginBottom : "10px", marginTop : "10px"}}>
                   <input
-                    type="text"
-                    placeholder="00.00 PM"
+                    type="time"
+                    placeholder=""
                     onChange={(e) => setRTime(e.target.value)}
                   />
                 </Box>
