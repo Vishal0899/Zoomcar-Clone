@@ -33,12 +33,12 @@ import { MdLogout } from "react-icons/Md";
 import { CgMenuBoxed } from "react-icons/Cg";
 import { AiOutlineCodeSandbox } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { logoutAction } from "../Redux/Auth/action";
 
 export const Navbar = () => {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const isAuth = useSelector((state) => state.AuthReducer.auth);
+  const {Name, Email, Number, auth} = useSelector((state) => state.AuthReducer);
 
   return (
     <>
@@ -46,7 +46,7 @@ export const Navbar = () => {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Hamburger />
+              <Hamburger Name={Name} Email={Email} Number={Number} auth={auth}/>
             </Box>
             <Box onClick={() => navigate("/")}>
               <Image src={ZoomCarLogo} />
@@ -92,11 +92,11 @@ export const Navbar = () => {
                   variant={"link"}
                   onClick={() => navigate("/login")}
                 >
-                  {isAuth ? "Vishal Pokale" : "Login/Signup"}
+                  {auth ? Name : "Login/Signup"}
                 </Button>
               </Box>
               <Box>
-                {isAuth ? <Avatar
+                {auth ? <Avatar
                   size={"sm"}
                   src={
                     "https://www.shutterstock.com/image-illustration/white-profile-icon-app-logo-blue-1932531338"
@@ -111,11 +111,22 @@ export const Navbar = () => {
   );
 };
 
-function Hamburger() {
+function Hamburger({Name, Email, Number, auth}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const isAuth = useSelector((state) => state.AuthReducer.auth);
   const city = useSelector((state) => state.CCreducer.City);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    const payload = {
+      Name : "",
+      Email : "",
+      Number : "",
+      Password : ""
+    }
+
+    dispatch(logoutAction(payload))
+  }
 
   return (
     <>
@@ -128,7 +139,7 @@ function Hamburger() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px" bg="black">
-            {!isAuth ? (
+            {!auth ? (
               <Box
                 color={"white"}
                 onClick={() => {
@@ -140,13 +151,13 @@ function Hamburger() {
             ) : (
               <Box>
                 <Box fontWeight="bold" color="white">
-                  vishal pokale
+                  {Name}
                 </Box>
                 <Box fontSize="md" color="#a5a3a3">
-                  vishal@gmail.com
+                  {Email}
                 </Box>
                 <Box fontSize="md" color="#a5a3a3">
-                  7040241422
+                  {Number}
                 </Box>
               </Box>
             )}
@@ -312,7 +323,7 @@ function Hamburger() {
                     fontSize: "25px",
                   }}
                 />
-                <Box mt={"5px"} ml={"15px"}>
+                <Box mt={"5px"} ml={"15px"} onClick={handleLogout}>
                   Logout
                 </Box>
               </Flex>

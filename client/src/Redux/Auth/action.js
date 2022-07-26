@@ -1,13 +1,13 @@
-export const AuthAction = () => {
+export const AuthAction = (payload) => {
   return {
     type: "isAuth",
+    payload,
   };
 };
 
-
-export const UserAction = (payload) => {
-    return {
-        type : "UserID",
-        payload
-    }
-}
+export const logoutAction = (payload) => {
+  return {
+    type: "logout",
+    payload,
+  };
+};

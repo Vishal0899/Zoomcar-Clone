@@ -1,5 +1,8 @@
 const initState = {
-  ID : "",
+  Name : "",
+  Email : "",
+  Number : "",
+  Password : "",
   auth: false,
 };
 
@@ -8,13 +11,21 @@ export const AuthReducer = (state = initState, action) => {
     case "isAuth":
       return {
         ...state,
+        Name : action.payload.Name,
+        Email : action.payload.Email,
+        Number : action.payload.Number,
+        Password : action.payload.Password,
         auth: true,
       };
-    case "UserID" :
-        return {
-            ...state,
-            ID : action.payload.userId
-        }
+    case "logout" :
+      return {
+        ...state,
+        Name : action.payload.Name,
+        Email : action.payload.Email,
+        Number : action.payload.Number,
+        Password : action.payload.Password,
+        auth: false,
+      }
     default:
       return state;
   }
