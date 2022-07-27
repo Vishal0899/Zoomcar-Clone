@@ -50,6 +50,7 @@ const TransitionExample = () => {
         onClose={onClose}
         isOpen={isOpen}
         motionPreset="slideInBottom"
+        closeOnOverlayClick={false}
       >
         <ModalOverlay />
         <ModalContent>
@@ -82,7 +83,7 @@ const TransitionExample = () => {
             </Box>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="green" m={"auto"} onClick={handleSubmit}>
+            <Button  colorScheme="green" m={"auto"} onClick={handleSubmit}>
               CONFIRM
             </Button>
           </ModalFooter>
@@ -91,3 +92,4 @@ const TransitionExample = () => {
     </>
   );
 };
+

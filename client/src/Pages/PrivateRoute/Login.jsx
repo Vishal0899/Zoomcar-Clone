@@ -7,10 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { AuthAction } from "../../Redux/Auth/action";
 import axios from "axios";
+import { useEffect } from "react";
 
 export const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [userExist, setUserExist] = useState(true);
+
+  useEffect(() => {
+
+  },[userExist])
  
   const [user, setUser] = useState({
     Name: "",
@@ -31,12 +37,21 @@ export const Login = () => {
     axios
       .post("http://localhost:8000/login", user)
       .then((res) => {
-        console.log(res.data.user)
+        alert(res.data.message)
         dispatch(AuthAction(res.data.user));
         navigate("/");
       })
-      .catch((err) => alert(err.response.data.message));
+      .catch((err) => {
+        if(err.response.data.message == "Password not matched"){
+          alert(err.response.data.message)
+        }else{
+          alert(err.response.data.message)
+          setUserExist(!userExist)
+        }
+      });
   };
+
+  console.log(userExist)
 
   return (
     <Box>
@@ -60,7 +75,7 @@ export const Login = () => {
                 <Box mr={2}>+91</Box>
               </Flex>
               <Box borderLeft="1px solid black">
-                <LoGin handleChange={handleChange} handlelogin={handlelogin} />
+                {userExist? <LoGin handleChange={handleChange} handlelogin={handlelogin} /> : navigate("/register")}
               </Box>
             </Flex>
             <hr />
@@ -115,7 +130,6 @@ const LoGin = ({ handleChange, handlelogin }) => {
                 placeholder="Mobile Number"
               />
             </FormControl>
-
             <FormControl mt={4}>
               <FormLabel>Password</FormLabel>
               <Input
@@ -141,46 +155,4 @@ const LoGin = ({ handleChange, handlelogin }) => {
   );
 };
 
-// const LoGin = () => {
-//   const { isOpen, onOpen, onClose } = useDisclosure()
 
-//   const initialRef = React.useRef(null)
-//   const finalRef = React.useRef(null)
-
-//   return (
-//     <>
-//       <Button onClick={onOpen} style={{marginLeft : "20px", backgroundColor : "white", color : "grey"}} >Enter Mobile Number</Button>
-
-//       <Modal
-//         initialFocusRef={initialRef}
-//         finalFocusRef={finalRef}
-//         isOpen={isOpen}
-//         onClose={onClose}
-//       >
-//         <ModalOverlay />
-//         <ModalContent>
-//           <ModalHeader>Create your account</ModalHeader>
-//           <ModalCloseButton />
-//           <ModalBody pb={6}>
-//             <FormControl>
-//               <FormLabel>First name</FormLabel>
-//               <Input ref={initialRef} placeholder='First name' />
-//             </FormControl>
-
-//             <FormControl mt={4}>
-//               <FormLabel>Last name</FormLabel>
-//               <Input placeholder='Last name' />
-//             </FormControl>
-//           </ModalBody>
-
-//           <ModalFooter>
-//             {/* <Button colorScheme='blue' mr={3}>
-//               Save
-//             </Button> */}
-//             <Button onClick={onClose}>Cancel</Button>
-//           </ModalFooter>
-//         </ModalContent>
-//       </Modal>
-//     </>
-//   )
-// }
