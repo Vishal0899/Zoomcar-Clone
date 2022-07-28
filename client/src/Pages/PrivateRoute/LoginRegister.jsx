@@ -1,5 +1,19 @@
 import {
-  Box, Flex, Image, Input, Button, useDisclosure, FormControl, FormLabel, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
+  Box,
+  Flex,
+  Image,
+  Input,
+  Button,
+  useDisclosure,
+  FormControl,
+  FormLabel,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -9,15 +23,16 @@ import { AuthAction } from "../../Redux/Auth/action";
 import axios from "axios";
 import { useEffect } from "react";
 
-export const Login = () => {
+export const LoginRegister = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [userExist, setUserExist] = useState(true);
+  const [userExist, setUserExist] = useState(false);
+  const [isExist, setExist] = useState(true);
 
   useEffect(() => {
+    setUserExist(!userExist);
+  }, [isExist]);
 
-  },[userExist])
- 
   const [user, setUser] = useState({
     Name: "",
     Email: "",
@@ -37,21 +52,21 @@ export const Login = () => {
     axios
       .post("http://localhost:8000/login", user)
       .then((res) => {
-        alert(res.data.message)
+        alert(res.data.message);
         dispatch(AuthAction(res.data.user));
         navigate("/");
       })
       .catch((err) => {
-        if(err.response.data.message == "Password not matched"){
-          alert(err.response.data.message)
-        }else{
-          alert(err.response.data.message)
-          setUserExist(!userExist)
+        if (err.response.data.message == "Password not matched") {
+          alert(err.response.data.message);
+        } else {
+          alert(err.response.data.message);
+          setExist(!isExist);
         }
       });
   };
 
-  console.log(userExist)
+  console.log(userExist);
 
   return (
     <Box>
@@ -75,7 +90,14 @@ export const Login = () => {
                 <Box mr={2}>+91</Box>
               </Flex>
               <Box borderLeft="1px solid black">
-                {userExist? <LoGin handleChange={handleChange} handlelogin={handlelogin} /> : navigate("/register")}
+                {userExist == true ? (
+                  <LoGin
+                    handleChange={handleChange}
+                    handlelogin={handlelogin}
+                  />
+                ) : (
+                  <Signup />
+                )}
               </Box>
             </Flex>
             <hr />
@@ -155,4 +177,101 @@ const LoGin = ({ handleChange, handlelogin }) => {
   );
 };
 
+//***********************************  Signup Popup *************************************************** */
 
+const Signup = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [user, setuser] = useState({
+    Name: "",
+    Email: "",
+    Number: "",
+    Password: "",
+  });
+
+  const handlechange = (e) => {
+    let { name, value } = e.target;
+    setuser({
+      ...user,
+      [name]: value,
+    });
+  };
+
+  const handleSignup = () => {
+    axios
+      .post("http://localhost:8000/register", user)
+      .then((res) => {
+        alert(res.data.message);
+        console.log(res.status);
+        dispatch(AuthAction(user));
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Box color={"#10a310"}>New here? Welcome!</Box>
+            <Box>
+              The mobile number has not been registered with us. Lets create a
+              new account.
+            </Box>
+            <br />
+            <br />
+            <Box>Create your account</Box>
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Full Name</FormLabel>
+              <Input
+                type="text"
+                name="Name"
+                onChange={handlechange}
+                placeholder="Name"
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input
+                type="email"
+                name="Email"
+                onChange={handlechange}
+                placeholder="Email"
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Mobile Number</FormLabel>
+              <Input
+                type="number"
+                name="Number"
+                onChange={handlechange}
+                placeholder="Mobile Number"
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                type="password"
+                name="Password"
+                onChange={handlechange}
+                placeholder="Password"
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button backgroundColor={"#34ec53"} onClick={handleSignup}>
+              Continue
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};

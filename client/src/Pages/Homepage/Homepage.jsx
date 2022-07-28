@@ -1,28 +1,11 @@
 import React, { useState } from "react";
-import {
-  Button,
-  FormControl,
-  Input,
-  Box,
-  Image,
-  Flex,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Button, FormControl, Box, Image, Flex } from "@chakra-ui/react";
 import { FcExpand } from "react-icons/fc";
 import { ReferAndEarn } from "./ReferAndEarn";
 import { Promo } from "./Promo";
 import { Offers } from "./Offers";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { CCaction } from "../../Redux/SelectCityAndCountryR/action";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { SelectCityAndCountry } from "../SelectCityAndCountry/SelectCityAndCountry";
 
 export const HomePage = () => {
@@ -34,11 +17,7 @@ export const HomePage = () => {
 
   return (
     <>
-      {Country === "" && City === "" ? (
-        <SelectCityAndCountry />
-      ) : (
-        ""
-      )}
+      {Country === "" && City === "" ? <SelectCityAndCountry /> : ""}
       <Box>
         <Box style={{ position: "relative" }}>
           <Box>

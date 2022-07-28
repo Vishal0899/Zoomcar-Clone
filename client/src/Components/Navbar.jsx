@@ -38,7 +38,9 @@ import { logoutAction } from "../Redux/Auth/action";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const {Name, Email, Number, auth} = useSelector((state) => state.AuthReducer);
+  const { Name, Email, Number, auth } = useSelector(
+    (state) => state.AuthReducer
+  );
 
   return (
     <>
@@ -46,7 +48,12 @@ export const Navbar = () => {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Hamburger Name={Name} Email={Email} Number={Number} auth={auth}/>
+              <Hamburger
+                Name={Name}
+                Email={Email}
+                Number={Number}
+                auth={auth}
+              />
             </Box>
             <Box onClick={() => navigate("/")}>
               <Image src={ZoomCarLogo} />
@@ -96,12 +103,16 @@ export const Navbar = () => {
                 </Button>
               </Box>
               <Box>
-                {auth ? <Avatar
-                  size={"sm"}
-                  src={
-                    "https://www.shutterstock.com/image-illustration/white-profile-icon-app-logo-blue-1932531338"
-                  }
-                /> : ""}
+                {auth ? (
+                  <Avatar
+                    size={"sm"}
+                    src={
+                      "https://www.shutterstock.com/image-illustration/white-profile-icon-app-logo-blue-1932531338"
+                    }
+                  />
+                ) : (
+                  ""
+                )}
               </Box>
             </Flex>
           </Flex>
@@ -111,7 +122,7 @@ export const Navbar = () => {
   );
 };
 
-function Hamburger({Name, Email, Number, auth}) {
+function Hamburger({ Name, Email, Number, auth }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const city = useSelector((state) => state.CCreducer.City);
@@ -119,14 +130,14 @@ function Hamburger({Name, Email, Number, auth}) {
 
   const handleLogout = () => {
     const payload = {
-      Name : "",
-      Email : "",
-      Number : "",
-      Password : ""
-    }
+      Name: "",
+      Email: "",
+      Number: "",
+      Password: "",
+    };
 
-    dispatch(logoutAction(payload))
-  }
+    dispatch(logoutAction(payload));
+  };
 
   return (
     <>
