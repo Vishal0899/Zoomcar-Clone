@@ -60,8 +60,25 @@ export const LoginRegister = () => {
         if (err.response.data.message == "Password not matched") {
           alert(err.response.data.message);
         } else {
-          alert(err.response.data.message);
+          alert(`${err.response.data.message} please register`);
           setExist(!isExist);
+        }
+      });
+  };
+
+  const handleSignup = () => {
+    axios
+      .post("http://localhost:8000/register", user)
+      .then((res) => {
+        alert(res.data.message);
+        console.log(res.status);
+        dispatch(AuthAction(user));
+        navigate("/");
+      })
+      .catch((err) => {
+        if (err.response.data.message == "User already exist") {
+          alert(`${err.response.data.message} please cheak details again`);
+          setExist(!(!isExist));
         }
       });
   };
@@ -96,7 +113,10 @@ export const LoginRegister = () => {
                     handlelogin={handlelogin}
                   />
                 ) : (
-                  <Signup />
+                  <Signup
+                    handleChange={handleChange}
+                    handleSignup={handleSignup}
+                  />
                 )}
               </Box>
             </Flex>
@@ -179,37 +199,10 @@ const LoGin = ({ handleChange, handlelogin }) => {
 
 //***********************************  Signup Popup *************************************************** */
 
-const Signup = () => {
+const Signup = ({ handleChange, handleSignup }) => {
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [user, setuser] = useState({
-    Name: "",
-    Email: "",
-    Number: "",
-    Password: "",
-  });
-
-  const handlechange = (e) => {
-    let { name, value } = e.target;
-    setuser({
-      ...user,
-      [name]: value,
-    });
-  };
-
-  const handleSignup = () => {
-    axios
-      .post("http://localhost:8000/register", user)
-      .then((res) => {
-        alert(res.data.message);
-        console.log(res.status);
-        dispatch(AuthAction(user));
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
-  };
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   return (
     <>
@@ -233,7 +226,7 @@ const Signup = () => {
               <Input
                 type="text"
                 name="Name"
-                onChange={handlechange}
+                onChange={handleChange}
                 placeholder="Name"
               />
             </FormControl>
@@ -242,7 +235,7 @@ const Signup = () => {
               <Input
                 type="email"
                 name="Email"
-                onChange={handlechange}
+                onChange={handleChange}
                 placeholder="Email"
               />
             </FormControl>
@@ -251,7 +244,7 @@ const Signup = () => {
               <Input
                 type="number"
                 name="Number"
-                onChange={handlechange}
+                onChange={handleChange}
                 placeholder="Mobile Number"
               />
             </FormControl>
@@ -260,7 +253,7 @@ const Signup = () => {
               <Input
                 type="password"
                 name="Password"
-                onChange={handlechange}
+                onChange={handleChange}
                 placeholder="Password"
               />
             </FormControl>

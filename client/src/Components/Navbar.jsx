@@ -38,6 +38,8 @@ import { logoutAction } from "../Redux/Auth/action";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const authorise = useSelector((state) => state.AuthReducer.auth);
+  const city = useSelector((state) => state.CCreducer.City);
   const { Name, Email, Number, auth } = useSelector(
     (state) => state.AuthReducer
   );
@@ -53,6 +55,7 @@ export const Navbar = () => {
                 Email={Email}
                 Number={Number}
                 auth={auth}
+                city={city}
               />
             </Box>
             <Box onClick={() => navigate("/")}>
@@ -97,6 +100,7 @@ export const Navbar = () => {
                   color={"white"}
                   textDecoration={"none"}
                   variant={"link"}
+                  // disabled={authorise==true}
                   onClick={() => navigate("/login")}
                 >
                   {auth ? Name : "Login/Signup"}
@@ -122,10 +126,9 @@ export const Navbar = () => {
   );
 };
 
-function Hamburger({ Name, Email, Number, auth }) {
+function Hamburger({ Name, Email, Number, auth, city }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const city = useSelector((state) => state.CCreducer.City);
   const dispatch = useDispatch();
 
   const handleLogout = () => {

@@ -70,15 +70,15 @@ const TransitionExample = () => {
             <Box border={"1px solid black"} p={2}>
               <select onChange={(e) => setCity(e.target.value)}>
                 <option value="">Select City</option>
-                <option value="Banglore">Banglore</option>
-                <option value="Pune">Pune</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Nashik">Nashik</option>
-                <option value="Chennai">Chennai</option>
-                <option value="Hyderabad">Hyderabad</option>
-                <option value="Chandigarh">Chandigarh</option>
-                <option value="Kolkata">Kolkata</option>
+                <option value="banglore">Banglore</option>
+                <option value="pune">Pune</option>
+                <option value="delhi">Delhi</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="nashik">Nashik</option>
+                <option value="chennai">Chennai</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="chandigarh">Chandigarh</option>
+                <option value="kolkata">Kolkata</option>
               </select>
             </Box>
           </ModalBody>

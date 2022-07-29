@@ -1,7 +1,11 @@
-import { Box, Flex, Image, Button } from "@chakra-ui/react";
-import React from "react";
+import { Box, Flex, Image, Button, Input } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { BsArrowRight } from "react-icons/bs";
+import { useEffect } from "react";
+import axios from "axios"
 
 export const CarsPage = () => {
   const data = [
@@ -43,23 +47,59 @@ export const CarsPage = () => {
     },
   ];
   const navigate = useNavigate();
+  const address = useSelector((state) => state.Lreducer.address);
+  const DateTime = useSelector((state) => state.DTreducer);
+  // const city = useSelector((state) => state.CCreducer.City);
+  const [dataa, setDatat] = useState([]);
+  
+  // console.log(dataa)
 
+  useEffect(() => {
+    axios.get("http://localhost:8000/Cars")
+    .then((res) => setDatat(res.data.data[0].Cars[0]))
+    .catch((err) => console.log(err))
+  },[])
+ 
   const handleBook = () => {
     alert("Booking Confirmed 😊");
     navigate("/");
   };
+
   return (
     <Box>
+      <Box w="58%" m={"auto"} mt={"10px"}>
+        <Flex justifyContent="space-between">
+          <Button
+                onClick={() => navigate("/searchLocation")}
+                bg="white"
+                w={"45%"}
+                border="1px solid green"
+                mb={2}
+                >
+                {address}
+              </Button>
+              <Button
+                w={"45%"}
+                onClick={() => navigate("/DateAndTime")}
+                mb={2}
+                bg="white"
+                border={"1px solid green"}
+                >
+                {DateTime.sDateAndTime} 
+                <BsArrowRight style={{marginLeft : "20px", marginRight : "20px"}}/>
+                {DateTime.rDateAndTime}
+          </Button>
+        </Flex>
+      </Box>
       <Box w="60%" m="auto" p={3}>
-        {data.map((elem) => {
-          return (
-            <Box mb={3}>
+        {/* {city} */}
+        {dataa?.nashik?.map((elem) => (
+            <Box mb={3} key={elem.id}>
               <Flex
-                key={elem.id}
                 justifyContent="space-between"
                 border="1px solid black"
                 p={3}
-              >
+                >
                 <Box w="60%" p={4}>
                   <Box fontSize="large" fontWeight="bold">
                     {elem.name}
@@ -85,8 +125,7 @@ export const CarsPage = () => {
                 </Box>
               </Flex>
             </Box>
-          );
-        })}
+        ))}
       </Box>
     </Box>
   );

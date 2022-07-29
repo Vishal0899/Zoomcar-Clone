@@ -18,8 +18,8 @@ export const SelectDateAndTime = () => {
 
   const handleDateTime = () => {
     const payload = {
-      sDateAndTime: `${sDate},${sTime}`,
-      rDateAndTime: `${rDate},${rTime}`,
+      sDateAndTime: `${sDate}  ${sTime}`,
+      rDateAndTime: `${rDate}  ${rTime}`,
     };
     dispatch(DTaction(payload));
     navigate("/");

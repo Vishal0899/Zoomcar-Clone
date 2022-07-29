@@ -7,7 +7,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { Laction } from "../../Redux/SelectLocationR/action";
-import { useEffect } from "react";
+// import { useEffect } from "react";
+import { CCaction } from "../../Redux/SelectCityAndCountryR/action";
 
 export const SearchLocation = () => {
   let navigate = useNavigate();
@@ -15,9 +16,21 @@ export const SearchLocation = () => {
   const dispatch = useDispatch();
   const Country = useSelector((state) => state.CCreducer.Country);
   const City = useSelector((state) => state.CCreducer.City);
+  const [city, setCity] = useState("");
   //******************************************* */
 
-    const successCallback = (position) => {
+  // useEffect(() => {
+  //   if(City != city){
+  //     alert(`Your selected address is in a different city than your currently selected city (${City})`)
+  //     const payload = {
+  //       Country,
+  //       City,
+  //     };
+  //     dispatch(CCaction(payload));
+  //   }
+  // },[city])
+
+  const successCallback = (position) => {
     // console.log(position);
     async function address() {
       let data = await fetch(
@@ -27,32 +40,47 @@ export const SearchLocation = () => {
       console.log(
         res.features[0].properties.address_line1,
         res.features[0].properties.address_line2
-        );
-        setAddress(
-          res.features[0].properties.address_line1 +
+      );
+      console.log(res);
+      setAddress(
+        res.features[0].properties.address_line1 +
           " " +
           res.features[0].properties.address_line2
-          );
-        }
-        address();
-      };
-      
-      const errorCallback = (error) => {
-        console.log(error);
-      };
-      
-      const handleAddress = () => {
-        const watchId = navigator.geolocation.watchPosition(
-          successCallback,
-          errorCallback
-          );
-        };
-        // ***************************************
+      );
+      setCity(res.features[0].properties.city);
+    }
+
+    address();
+  };
+
+  const errorCallback = (error) => {
+    console.log(error);
+  };
+
+  const handleAddress = () => {
+    const watchId = navigator.geolocation.watchPosition(
+      successCallback,
+      errorCallback
+    );
+  };
+  // ***************************************
   const handleConfirm = () => {
-    const payload = {
+    const payload1 = {
       address: address,
     };
-    dispatch(Laction(payload));
+    if (city != City) {
+      alert(
+        `Your selected address is in a different city than your currently selected city (${City}). We are updating you current city.`
+      );
+      const payload2 = {
+        Country,
+        City,
+      };
+      dispatch(CCaction(payload2));
+      dispatch(Laction(payload1));
+    } else {
+      dispatch(Laction(payload1));
+    }
     navigate("/");
   };
   return (
