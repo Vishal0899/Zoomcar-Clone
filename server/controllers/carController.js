@@ -12,14 +12,6 @@ router.get("", async (req, res) => {
   }
 });
 
-router.get("", async (req, res) => {
-  try {
-    const data = await Cars.find();
-    return res.status(201).send({ data: data });
-  } catch (error) {
-    return res.status(500).send({ message: error });
-  }
-});
 
 // router.get("/:id", async (req, res) => {
 //   try {
