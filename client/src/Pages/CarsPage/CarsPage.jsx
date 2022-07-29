@@ -49,10 +49,10 @@ export const CarsPage = () => {
   const navigate = useNavigate();
   const address = useSelector((state) => state.Lreducer.address);
   const DateTime = useSelector((state) => state.DTreducer);
-  // const city = useSelector((state) => state.CCreducer.City);
+  const city = useSelector((state) => state.CCreducer.City);
   const [dataa, setDatat] = useState([]);
   
-  // console.log(dataa)
+  console.log(dataa)
 
   useEffect(() => {
     axios.get("http://localhost:8000/Cars")
