@@ -96,8 +96,8 @@ export const CarsPage = () => {
       <Box w="60%" m="auto" p={3}>
         {Object.keys(dataa).map((elem) => {
           if (elem == city) {
-            return dataa[elem].map((e) => (
-              <Box mb={3} key={e.id}>
+            return dataa[elem].map((item) => (
+              <Box mb={3} key={item.id}>
                 <Flex
                   justifyContent="space-between"
                   border="1px solid black"
@@ -105,17 +105,17 @@ export const CarsPage = () => {
                 >
                   <Box w="60%" p={4}>
                     <Box fontSize="large" fontWeight="bold">
-                      {e.name}
+                      {item.name}
                     </Box>
                     <Box>{e.type}</Box>
                     <Flex>
                       <Box mr={2} mt={1}>
                         <AiFillStar />
                       </Box>
-                      <Box>{e.rating}</Box>
+                      <Box>{item.rating}</Box>
                     </Flex>
                     <Box color="green" fontWeight="bold">
-                      {e.price}
+                      {item.price}
                     </Box>
                     <Box mt={10}>
                       <Button bg="green" color="white" onClick={handleBook}>
@@ -124,7 +124,7 @@ export const CarsPage = () => {
                     </Box>
                   </Box>
                   <Box w="40%">
-                    <Image src={e.image} />
+                    <Image src={item.image} />
                   </Box>
                 </Flex>
               </Box>
