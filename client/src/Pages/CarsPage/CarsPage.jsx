@@ -97,7 +97,7 @@ export const CarsPage = () => {
         {Object.keys(dataa).map((elem) => {
           if (elem == city) {
             return dataa[elem].map((item) => (
-              <Box mb={3} key={item.id}>
+              <Box mb={3} key={e.id}>
                 <Flex
                   justifyContent="space-between"
                   border="1px solid black"
