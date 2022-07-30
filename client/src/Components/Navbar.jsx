@@ -261,7 +261,7 @@ function Hamburger({ Name, Email, Number, auth, city }) {
               </Flex>
 
               <Flex justifyContent={"space-between"}>
-                <Flex onClick={() => navigate("/selectCity")} mt={"10px"}>
+                <Flex onClick={() => navigate("/CityAndCountry")} mt={"10px"}>
                   <IoLocationOutline
                     style={{
                       marginRight: "10px",

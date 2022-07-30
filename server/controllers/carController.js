@@ -13,14 +13,5 @@ router.get("", async (req, res) => {
 });
 
 
-// router.get("/:id", async (req, res) => {
-//   try {
-//       const cart = await Cart.findById(req.params.id).lean().exec();
-//       return res.status(200).send(cart);
-//   } catch (err) {
-//       return res.status(500).send({ message: err.message });
-//   }
-// });
-
 module.exports = router;
 
