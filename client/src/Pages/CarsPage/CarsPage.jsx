@@ -112,7 +112,7 @@ export const CarsPage = () => {
                       <Box mr={2} mt={1}>
                         <AiFillStar />
                       </Box>
-                      <Box>{item.rating}</Box>
+                      <Box>{e.rating}</Box>
                     </Flex>
                     <Box color="green" fontWeight="bold">
                       {e.price}
