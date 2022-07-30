@@ -105,7 +105,7 @@ export const CarsPage = () => {
                 >
                   <Box w="60%" p={4}>
                     <Box fontSize="large" fontWeight="bold">
-                      {item.name}
+                      {e.name}
                     </Box>
                     <Box>{e.type}</Box>
                     <Flex>
