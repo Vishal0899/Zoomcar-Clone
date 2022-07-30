@@ -124,7 +124,7 @@ export const CarsPage = () => {
                     </Box>
                   </Box>
                   <Box w="40%">
-                    <Image src={item.image} />
+                    <Image src={e.image} />
                   </Box>
                 </Flex>
               </Box>
