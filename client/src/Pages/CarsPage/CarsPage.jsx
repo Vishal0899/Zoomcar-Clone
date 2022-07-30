@@ -115,7 +115,7 @@ export const CarsPage = () => {
                       <Box>{item.rating}</Box>
                     </Flex>
                     <Box color="green" fontWeight="bold">
-                      {item.price}
+                      {e.price}
                     </Box>
                     <Box mt={10}>
                       <Button bg="green" color="white" onClick={handleBook}>
