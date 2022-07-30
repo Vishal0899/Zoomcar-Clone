@@ -96,7 +96,7 @@ export const CarsPage = () => {
       <Box w="60%" m="auto" p={3}>
         {Object.keys(dataa).map((elem) => {
           if (elem == city) {
-            return dataa[elem].map((item) => (
+            return dataa[elem].map((e) => (
               <Box mb={3} key={e.id}>
                 <Flex
                   justifyContent="space-between"
