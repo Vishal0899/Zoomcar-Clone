@@ -100,7 +100,7 @@ export const Navbar = () => {
                   color={"white"}
                   textDecoration={"none"}
                   variant={"link"}
-                  // disabled={authorise==true}
+                  disabled={authorise == true}
                   onClick={() => navigate("/login")}
                 >
                   {auth ? Name : "Login/Signup"}

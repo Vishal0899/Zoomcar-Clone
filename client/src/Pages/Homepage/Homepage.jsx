@@ -52,6 +52,7 @@ export const HomePage = () => {
               onClick={() => navigate("/DateAndTime")}
               mb={2}
               border={"1px solid grey"}
+              disabled={address == ""}
             >
               {DateTime.sDateAndTime == ""
                 ? "Choose Trip Dates"
@@ -62,6 +63,7 @@ export const HomePage = () => {
               w={"full"}
               onClick={() => navigate("/carsPage")}
               style={{ color: "white" }}
+              disabled={DateTime.sDateAndTime == ""}
             >
               FIND CARS
             </Button>
