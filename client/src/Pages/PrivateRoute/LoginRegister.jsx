@@ -50,7 +50,7 @@ export const LoginRegister = () => {
 
   const handlelogin = () => {
     axios
-      .post("http://localhost:8000/login", user)
+      .post("https://zoompractise.herokuapp.com/login", user)
       .then((res) => {
         alert(res.data.message);
         dispatch(AuthAction(res.data.user));
@@ -68,7 +68,7 @@ export const LoginRegister = () => {
 
   const handleSignup = () => {
     axios
-      .post("http://localhost:8000/register", user)
+      .post("https://zoompractise.herokuapp.com/register", user)
       .then((res) => {
         alert(res.data.message);
         console.log(res.status);
@@ -78,7 +78,7 @@ export const LoginRegister = () => {
       .catch((err) => {
         if (err.response.data.message == "User already exist") {
           alert(`${err.response.data.message} please cheak details again`);
-          setExist(!(!isExist));
+          setExist(!!isExist);
         }
       });
   };

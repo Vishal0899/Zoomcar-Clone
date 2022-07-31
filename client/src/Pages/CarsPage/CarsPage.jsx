@@ -57,7 +57,7 @@ export const CarsPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/Cars")
+      .get("https://zoompractise.herokuapp.com/Cars")
       .then((res) => setDatat(res.data.data[0].Cars[0]))
       .catch((err) => console.log(err));
   }, []);

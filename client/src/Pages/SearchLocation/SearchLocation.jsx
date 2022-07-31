@@ -3,11 +3,10 @@ import React from "react";
 import { TbCurrentLocation } from "react-icons/tb";
 import { BsMap } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { Laction } from "../../Redux/SelectLocationR/action";
-// import { useEffect } from "react";
 import { CCaction } from "../../Redux/SelectCityAndCountryR/action";
 
 export const SearchLocation = () => {
@@ -18,17 +17,6 @@ export const SearchLocation = () => {
   const City = useSelector((state) => state.CCreducer.City);
   const [city, setCity] = useState("");
   //******************************************* */
-
-  // useEffect(() => {
-  //   if(City != city){
-  //     alert(`Your selected address is in a different city than your currently selected city (${City})`)
-  //     const payload = {
-  //       Country,
-  //       City,
-  //     };
-  //     dispatch(CCaction(payload));
-  //   }
-  // },[city])
 
   const successCallback = (position) => {
     // console.log(position);

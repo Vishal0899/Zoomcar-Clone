@@ -42,9 +42,6 @@ const TransitionExample = () => {
 
   return (
     <>
-      {/* <Button ml="45%" mt="10%" onClick={onOpen}>
-        Select City/Country
-      </Button> */}
       <Modal
         isCentered
         onClose={onClose}
@@ -83,7 +80,7 @@ const TransitionExample = () => {
             </Box>
           </ModalBody>
           <ModalFooter>
-            <Button  colorScheme="green" m={"auto"} onClick={handleSubmit}>
+            <Button colorScheme="green" m={"auto"} onClick={handleSubmit}>
               CONFIRM
             </Button>
           </ModalFooter>
@@ -92,4 +89,3 @@ const TransitionExample = () => {
     </>
   );
 };
-
