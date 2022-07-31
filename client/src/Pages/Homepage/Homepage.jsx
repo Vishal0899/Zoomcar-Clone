@@ -14,8 +14,6 @@ export const HomePage = () => {
   const City = useSelector((state) => state.CCreducer.City);
   const address = useSelector((state) => state.Lreducer.address);
   const DateTime = useSelector((state) => state.DTreducer);
-  // const auth = useSelector((state) => state.AuthReducer.auth)
-  // console.log(auth)
 
   return (
     <>

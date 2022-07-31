@@ -13,6 +13,8 @@ app.use(cors());
 app.use("/cars", Cars);
 app.use(require("./controllers/userController.js"));
 
-app.listen(8000, () => {
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => {
   console.log("Listening On Port 8000");
 });

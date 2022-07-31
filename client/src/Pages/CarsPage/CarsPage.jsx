@@ -57,7 +57,7 @@ export const CarsPage = () => {
 
   useEffect(() => {
     axios
-      .get("https://zoompractise.herokuapp.com/Cars")
+      .get("https://git.heroku.com/cloned-zoomcar.git/Cars")
       .then((res) => setDatat(res.data.data[0].Cars[0]))
       .catch((err) => console.log(err));
   }, []);

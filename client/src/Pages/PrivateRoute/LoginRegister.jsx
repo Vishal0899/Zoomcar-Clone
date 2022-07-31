@@ -50,7 +50,7 @@ export const LoginRegister = () => {
 
   const handlelogin = () => {
     axios
-      .post("https://zoompractise.herokuapp.com/login", user)
+      .post("https://git.heroku.com/cloned-zoomcar.git/login", user)
       .then((res) => {
         alert(res.data.message);
         dispatch(AuthAction(res.data.user));
@@ -68,7 +68,7 @@ export const LoginRegister = () => {
 
   const handleSignup = () => {
     axios
-      .post("https://zoompractise.herokuapp.com/register", user)
+      .post("https://git.heroku.com/cloned-zoomcar.git/register", user)
       .then((res) => {
         alert(res.data.message);
         console.log(res.status);
