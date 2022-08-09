@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormControl, Box, Image, Flex } from "@chakra-ui/react";
+import { Button, FormControl, Box, Image, Flex, Input } from "@chakra-ui/react";
 import { FcExpand } from "react-icons/fc";
 import { ReferAndEarn } from "./ReferAndEarn";
 import { Promo } from "./Promo";

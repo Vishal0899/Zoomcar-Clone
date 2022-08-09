@@ -53,8 +53,8 @@ const TransitionExample = () => {
         <ModalContent>
           <ModalHeader ml={12}>Select your pickup country/city</ModalHeader>
           <ModalBody>
-            <Box border={"1px solid black"} p={2}>
-              <select onChange={(e) => setCountry(e.target.value)}>
+            <Box>
+              <select style={{padding:"10px 65% 10px 10px", border : "1px solid black", borderRadius : "7px"}} onChange={(e) => setCountry(e.target.value)}>
                 <option value="">Select Country</option>
                 <option value="America">America</option>
                 <option value="India">India</option>
@@ -64,8 +64,8 @@ const TransitionExample = () => {
               </select>
             </Box>
             <br />
-            <Box border={"1px solid black"} p={2}>
-              <select onChange={(e) => setCity(e.target.value)}>
+            <Box>
+              <select disabled={Country==""} style={{padding:"10px 70% 10px 10px", border : "1px solid black", borderRadius : "7px"}} onChange={(e) => setCity(e.target.value)}>
                 <option value="">Select City</option>
                 <option value="banglore">Banglore</option>
                 <option value="pune">Pune</option>
@@ -80,7 +80,7 @@ const TransitionExample = () => {
             </Box>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="green" m={"auto"} onClick={handleSubmit}>
+            <Button colorScheme="green" disabled={City==""} m={"auto"} onClick={handleSubmit}>
               CONFIRM
             </Button>
           </ModalFooter>

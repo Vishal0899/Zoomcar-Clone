@@ -81,33 +81,38 @@ export const SearchLocation = () => {
           />
         </Flex>
       </Box>
-      <Box w="75%" m="auto" p={20}>
+      <Box w="75%" m="auto" p={10} >
         <Flex>
-          <Box>
+          <Box w={"60%"} >
             <Input
               onChange={(e) => setAddress(e.target.value)}
               value={address ? address : ""}
               placeholder="Select your starting point"
-              width="450px"
+              width="100%"
               h="50px"
             />
           </Box>
-          <Flex ml="20px" mt="10px" onClick={handleAddress}>
-            <TbCurrentLocation style={{ fontSize: "33px" }} />
-            <Box ml="10px">Current Location</Box>
+          <Flex  w={"20%"} ml="20px" mt="10px" onClick={handleAddress}>
+            <Box w={"50%"} >
+              <TbCurrentLocation style={{ fontSize: "30" }} />
+            </Box>
+            <Box>Current Location</Box>
           </Flex>
-          <Flex ml="20px" mt="10px">
-            <BsMap style={{ fontSize: "27px" }} />
-            <Box ml="10px">Select Location on Map</Box>
+          <Flex w={"20%"} ml="20px" mt="10px">
+            <Box w={"50%"}>
+              <BsMap style={{ fontSize: "20" }} />
+            </Box>
+            <Box>Select Location on Map</Box>
           </Flex>
         </Flex>
-        <Box mt="50px" ml="20%">
+        <Box mt="50px" ml="5%">
           <Button
             h="60px"
-            w="500px"
+            w="100%"
             bg="#30e32a"
             color="white"
             onClick={handleConfirm}
+            disabled={address==""}
           >
             CONFIRM PICKUP LOCATION
           </Button>
