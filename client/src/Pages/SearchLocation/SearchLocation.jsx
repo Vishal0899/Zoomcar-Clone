@@ -81,7 +81,7 @@ export const SearchLocation = () => {
           />
         </Flex>
       </Box>
-      <Box w="75%" m="auto" p={10} >
+      <Box w="75%" m="auto" p={10}  >
         <Flex>
           <Box w={"60%"} >
             <Input
@@ -92,14 +92,14 @@ export const SearchLocation = () => {
               h="50px"
             />
           </Box>
-          <Flex  w={"20%"} ml="20px" mt="10px" onClick={handleAddress}>
-            <Box w={"50%"} >
+          <Flex  w={"20%"} ml="20px" mt="10px"  onClick={handleAddress}>
+            <Box w={"30%"} >
               <TbCurrentLocation style={{ fontSize: "30" }} />
             </Box>
             <Box>Current Location</Box>
           </Flex>
-          <Flex w={"20%"} ml="20px" mt="10px">
-            <Box w={"50%"}>
+          <Flex w={"20%"} mt={"10px"} ml="20px" >
+            <Box w={"30%"} mt={"5px"}>
               <BsMap style={{ fontSize: "20" }} />
             </Box>
             <Box>Select Location on Map</Box>
