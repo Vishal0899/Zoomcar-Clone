@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { CCaction } from "../../Redux/SelectCityAndCountryR/action";
 import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
 
 export const SelectCityAndCountry = () => {
   return (
@@ -30,13 +31,19 @@ const TransitionExample = () => {
   const [Country, setCountry] = useState("");
   const [City, setCity] = useState("");
   const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
   const handleSubmit = () => {
+    setCookie("Country", Country);
+    setCookie("City", City);
     const payload = {
       Country,
       City,
     };
     dispatch(CCaction(payload));
+    setCookie("Country", Country);
+    setCookie("City", City);
+    // console.log(Country, City);
     navigate("/");
   };
 
@@ -54,7 +61,14 @@ const TransitionExample = () => {
           <ModalHeader ml={12}>Select your pickup country/city</ModalHeader>
           <ModalBody>
             <Box>
-              <select style={{padding:"10px 65% 10px 10px", border : "1px solid black", borderRadius : "7px"}} onChange={(e) => setCountry(e.target.value)}>
+              <select
+                style={{
+                  padding: "10px 65% 10px 10px",
+                  border: "1px solid black",
+                  borderRadius: "7px",
+                }}
+                onChange={(e) => setCountry(e.target.value)}
+              >
                 <option value="">Select Country</option>
                 <option value="America">America</option>
                 <option value="India">India</option>
@@ -65,22 +79,35 @@ const TransitionExample = () => {
             </Box>
             <br />
             <Box>
-              <select disabled={Country==""} style={{padding:"10px 70% 10px 10px", border : "1px solid black", borderRadius : "7px"}} onChange={(e) => setCity(e.target.value)}>
+              <select
+                disabled={Country == ""}
+                style={{
+                  padding: "10px 70% 10px 10px",
+                  border: "1px solid black",
+                  borderRadius: "7px",
+                }}
+                onChange={(e) => setCity(e.target.value)}
+              >
                 <option value="">Select City</option>
-                <option value="banglore">Banglore</option>
-                <option value="pune">Pune</option>
-                <option value="delhi">Delhi</option>
-                <option value="mumbai">Mumbai</option>
-                <option value="nashik">Nashik</option>
-                <option value="chennai">Chennai</option>
-                <option value="hyderabad">Hyderabad</option>
-                <option value="chandigarh">Chandigarh</option>
-                <option value="kolkata">Kolkata</option>
+                <option value="Banglore">Banglore</option>
+                <option value="Pune">Pune</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Nashik">Nashik</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Kolkata">Kolkata</option>
               </select>
             </Box>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="green" disabled={City==""} m={"auto"} onClick={handleSubmit}>
+            <Button
+              colorScheme="green"
+              disabled={City == "" }
+              m={"auto"}
+              onClick={handleSubmit}
+            >
               CONFIRM
             </Button>
           </ModalFooter>

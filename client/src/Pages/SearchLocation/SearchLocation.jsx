@@ -8,8 +8,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { Laction } from "../../Redux/SelectLocationR/action";
 import { CCaction } from "../../Redux/SelectCityAndCountryR/action";
+import { useCookies } from "react-cookie";
 
 export const SearchLocation = () => {
+  const [cookies, setCookie, removeCookie] = useCookies([]);
   let navigate = useNavigate();
   const [address, setAddress] = useState("");
   const dispatch = useDispatch();
@@ -30,6 +32,8 @@ export const SearchLocation = () => {
         res.features[0].properties.address_line2
       );
       console.log(res);
+      setCookie("City", res.features[0].properties.city);
+      setCookie("Country", res.features[0].properties.country);
       setAddress(
         res.features[0].properties.address_line1 +
           " " +
@@ -56,17 +60,19 @@ export const SearchLocation = () => {
     const payload1 = {
       address: address,
     };
-    if (city != City) {
+    if (city != City || cookies.City) {
       alert(
-        `Your selected address is in a different city than your currently selected city (${City}). We are updating you current city.`
+        `Your selected address is in a different city than your currently selected city (${cookies.City}). We are updating you current city.`
       );
       const payload2 = {
         Country,
         City,
       };
+      setCookie("Address", address);
       dispatch(CCaction(payload2));
       dispatch(Laction(payload1));
     } else {
+      setCookie("Address", address);
       dispatch(Laction(payload1));
     }
     navigate("/");
@@ -81,9 +87,9 @@ export const SearchLocation = () => {
           />
         </Flex>
       </Box>
-      <Box w="75%" m="auto" p={10}  >
+      <Box w="75%" m="auto" p={10}>
         <Flex>
-          <Box w={"60%"} >
+          <Box w={"60%"}>
             <Input
               onChange={(e) => setAddress(e.target.value)}
               value={address ? address : ""}
@@ -92,13 +98,13 @@ export const SearchLocation = () => {
               h="50px"
             />
           </Box>
-          <Flex  w={"20%"} ml="20px" mt="10px"  onClick={handleAddress}>
-            <Box w={"30%"} >
+          <Flex w={"20%"} ml="20px" mt="10px" onClick={handleAddress}>
+            <Box w={"30%"}>
               <TbCurrentLocation style={{ fontSize: "30" }} />
             </Box>
             <Box>Current Location</Box>
           </Flex>
-          <Flex w={"20%"} mt={"10px"} ml="20px" >
+          <Flex w={"20%"} mt={"10px"} ml="20px">
             <Box w={"30%"} mt={"5px"}>
               <BsMap style={{ fontSize: "20" }} />
             </Box>
@@ -112,7 +118,7 @@ export const SearchLocation = () => {
             bg="#30e32a"
             color="white"
             onClick={handleConfirm}
-            disabled={address==""}
+            disabled={address == ""}
           >
             CONFIRM PICKUP LOCATION
           </Button>

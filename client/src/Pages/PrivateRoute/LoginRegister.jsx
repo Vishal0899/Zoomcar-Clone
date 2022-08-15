@@ -22,12 +22,14 @@ import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { AuthAction } from "../../Redux/Auth/action";
 import axios from "axios";
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 export const LoginRegister = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userExist, setUserExist] = useState(false);
   const [isExist, setExist] = useState(true);
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
   useEffect(() => {
     setUserExist(!userExist);
@@ -53,8 +55,13 @@ export const LoginRegister = () => {
       .post("https://cloned-zoomcar.herokuapp.com/login", user)
       .then((res) => {
         alert(res.data.message);
+        setCookie("auth", true);
+        setCookie("userName", res.data.user.Name);
+        setCookie("userEmail", res.data.user.Email);
+        setCookie("userNumber", res.data.user.Number);
         dispatch(AuthAction(res.data.user));
         navigate("/");
+        window.location.reload(true);
       })
       .catch((err) => {
         if (err.response.data.message == "Password not matched") {
@@ -71,9 +78,14 @@ export const LoginRegister = () => {
       .post("https://cloned-zoomcar.herokuapp.com/register", user)
       .then((res) => {
         alert(res.data.message);
+        setCookie("auth", true);
+        setCookie("userName", user.Name);
+        setCookie("userEmail", user.Email);
+        setCookie("userNumber", user.Number);
         console.log(res.status);
         dispatch(AuthAction(user));
         navigate("/");
+        window.location.reload(true);
       })
       .catch((err) => {
         if (err.response.data.message == "User already exist") {
@@ -170,6 +182,7 @@ const LoGin = ({ handleChange, handlelogin }) => {
                 name="Number"
                 onChange={handleChange}
                 placeholder="Mobile Number"
+                maxLength={10}
               />
             </FormControl>
             <FormControl mt={4}>

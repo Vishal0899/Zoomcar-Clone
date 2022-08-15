@@ -6,15 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import { useEffect } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 export const CarsPage = () => {
   const navigate = useNavigate();
   const address = useSelector((state) => state.Lreducer.address);
   const DateTime = useSelector((state) => state.DTreducer);
-  const city = useSelector((state) => state.CCreducer.City);
+  // const city = useSelector((state) => state.CCreducer.City);
+  const [cookies, setCookie, removeCookie] = useCookies([]);
   const [data, setData] = useState({});
 
-  // console.log(data);
+  console.log(data);
+  console.log(cookies.City);
 
   useEffect(() => {
     axios
@@ -25,6 +28,9 @@ export const CarsPage = () => {
 
   const handleBook = () => {
     alert("Booking Confirmed 😊");
+    removeCookie("Address")
+    removeCookie("startDT")
+    removeCookie("returnDT")
     navigate("/");
   };
 
@@ -35,11 +41,11 @@ export const CarsPage = () => {
           <Button
             onClick={() => navigate("/searchLocation")}
             bg="white"
-            w={"45%"}
+            w={"50%"}
             border="1px solid green"
             mb={2}
           >
-            {address}
+            {address || cookies.Address}
           </Button>
           <Button
             w={"45%"}
@@ -48,15 +54,15 @@ export const CarsPage = () => {
             bg="white"
             border={"1px solid green"}
           >
-            {DateTime.sDateAndTime}
+            {DateTime.sDateAndTime || cookies.startDT}
             <BsArrowRight style={{ marginLeft: "20px", marginRight: "20px" }} />
-            {DateTime.rDateAndTime}
+            {DateTime.rDateAndTime || cookies.returnDT}
           </Button>
         </Flex>
       </Box>
       <Box w="60%" m="auto" p={3}>
         {Object.keys(data).map((elem) => {
-          if (elem == city) {
+          if (elem == cookies.City) {
             return data[elem].map((e) => (
               <Box mb={3} key={e.id}>
                 <Flex
@@ -85,7 +91,7 @@ export const CarsPage = () => {
                     </Box>
                   </Box>
                   <Box w="40%">
-                    <Image src={e.image} />
+                    <Image style={{ width: "95%" }} src={e.image} />
                   </Box>
                 </Flex>
               </Box>

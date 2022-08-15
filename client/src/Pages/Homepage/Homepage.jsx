@@ -7,6 +7,7 @@ import { Offers } from "./Offers";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SelectCityAndCountry } from "../SelectCityAndCountry/SelectCityAndCountry";
+import { useCookies } from "react-cookie";
 
 export const HomePage = () => {
   let navigate = useNavigate();
@@ -14,10 +15,26 @@ export const HomePage = () => {
   const City = useSelector((state) => state.CCreducer.City);
   const address = useSelector((state) => state.Lreducer.address);
   const DateTime = useSelector((state) => state.DTreducer);
+  const [cookies, setCookie, removeCookie] = useCookies([]);
+  // console.log(cookies.Country, cookies.City);
+
+  const checkLogin = () => {
+    if (cookies.auth !== undefined) {
+      navigate("/searchLocation");
+    } else {
+      alert("Login/Register your account");
+      navigate("/login");
+    }
+  };
 
   return (
     <>
-      {Country === "" && City === "" ? <SelectCityAndCountry /> : ""}
+      {(Country !== "" && City !== "") ||
+      (cookies.Country !== undefined && cookies.City !== undefined) ? (
+        ""
+      ) : (
+        <SelectCityAndCountry />
+      )}
       <Box>
         <Box style={{ position: "relative" }}>
           <Box>
@@ -35,14 +52,14 @@ export const HomePage = () => {
               <FcExpand style={{ marginTop: "8px" }} />
             </Flex>
             <Button
-              onClick={() => navigate("/searchLocation")}
+              onClick={checkLogin}
               bg="white"
               w={"full"}
               border="1px solid grey"
               mb={2}
             >
-              {address !== ""
-                ? `${address}`
+              {cookies.Address !== undefined
+                ? `${cookies.Address}`
                 : "Pick Up City, Airport, Address or Hotel"}
             </Button>
             <Button
@@ -50,18 +67,22 @@ export const HomePage = () => {
               onClick={() => navigate("/DateAndTime")}
               mb={2}
               border={"1px solid grey"}
-              disabled={address == ""}
+              disabled={address == "" || cookies.Address == undefined}
             >
-              {DateTime.sDateAndTime == ""
+              {cookies.startDT == undefined
                 ? "Choose Trip Dates"
-                : `${DateTime.sDateAndTime} ------->  ${DateTime.rDateAndTime}`}
+                : `${DateTime.sDateAndTime || cookies.startDT} ------->  ${
+                    DateTime.rDateAndTime || cookies.returnDT
+                  }`}
             </Button>
             <Button
               bg="#34ec53"
               w={"full"}
               onClick={() => navigate("/carsPage")}
               style={{ color: "white" }}
-              disabled={DateTime.sDateAndTime == ""}
+              disabled={
+                DateTime.sDateAndTime == "" || cookies.startDT == undefined
+              }
             >
               FIND CARS
             </Button>

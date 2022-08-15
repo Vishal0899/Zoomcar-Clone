@@ -35,14 +35,18 @@ import { AiOutlineCodeSandbox } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { logoutAction } from "../Redux/Auth/action";
+import { useCookies } from "react-cookie";
 
 export const Navbar = () => {
+  const [cookies, setCookie, removeCookie] = useCookies([]);
   const navigate = useNavigate();
-  const authorise = useSelector((state) => state.AuthReducer.auth);
+  // const authorise = useSelector((state) => state.AuthReducer.auth);
   const city = useSelector((state) => state.CCreducer.City);
   const { Name, Email, Number, auth } = useSelector(
     (state) => state.AuthReducer
   );
+  // console.log(auth);
+  console.log(cookies.auth);
 
   return (
     <>
@@ -100,14 +104,16 @@ export const Navbar = () => {
                   color={"white"}
                   textDecoration={"none"}
                   variant={"link"}
-                  disabled={authorise == true}
+                  disabled={cookies.auth !== undefined}
                   onClick={() => navigate("/login")}
                 >
-                  {auth ? Name : "Login/Signup"}
+                  {cookies.auth != undefined
+                    ? cookies.userName
+                    : "Login/Signup"}
                 </Button>
               </Box>
               <Box>
-                {auth ? (
+                {cookies.auth !== undefined ? (
                   <Avatar
                     size={"sm"}
                     src={
@@ -127,20 +133,28 @@ export const Navbar = () => {
 };
 
 function Hamburger({ Name, Email, Number, auth, city }) {
+  const [cookies, setCookie, removeCookie] = useCookies([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
+    removeCookie("userName");
+    removeCookie("userEmail");
+    removeCookie("userNumber");
+    removeCookie("auth");
+    // setCookie("auth", false);
     const payload = {
       Name: "",
       Email: "",
       Number: "",
       Password: "",
     };
-
     dispatch(logoutAction(payload));
   };
+
+  // console.log(cookies.auth);
+  // console.log(cookies.userName);
 
   return (
     <>
@@ -153,7 +167,7 @@ function Hamburger({ Name, Email, Number, auth, city }) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px" bg="black">
-            {!auth ? (
+            {cookies.auth == undefined ? (
               <Box
                 color={"white"}
                 onClick={() => {
@@ -165,13 +179,13 @@ function Hamburger({ Name, Email, Number, auth, city }) {
             ) : (
               <Box>
                 <Box fontWeight="bold" color="white">
-                  {Name}
+                  {Name || cookies.userName}
                 </Box>
                 <Box fontSize="md" color="#a5a3a3">
-                  {Email}
+                  {Email || cookies.userEmail}
                 </Box>
                 <Box fontSize="md" color="#a5a3a3">
-                  {Number}
+                  {Number || cookies.userNumber}
                 </Box>
               </Box>
             )}
@@ -275,7 +289,9 @@ function Hamburger({ Name, Email, Number, auth, city }) {
                 </Flex>
                 <Box>
                   <Box mt={"15px"} color="green">
-                    {city === "" ? "" : city}
+                    {city !== "" || cookies.City !== undefined
+                      ? city || cookies.City
+                      : ""}
                   </Box>
                 </Box>
               </Flex>
