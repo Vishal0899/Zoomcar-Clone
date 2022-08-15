@@ -76,6 +76,7 @@ export const SearchLocation = () => {
       dispatch(Laction(payload1));
     }
     navigate("/");
+    window.location.reload();
   };
   return (
     <Box>

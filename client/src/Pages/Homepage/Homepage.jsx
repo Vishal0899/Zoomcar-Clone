@@ -26,6 +26,7 @@ export const HomePage = () => {
       navigate("/login");
     }
   };
+  console.log(cookies.Address)
 
   return (
     <>
@@ -64,10 +65,11 @@ export const HomePage = () => {
             </Button>
             <Button
               w={"full"}
+              bg="white"
               onClick={() => navigate("/DateAndTime")}
               mb={2}
               border={"1px solid grey"}
-              disabled={address == "" || cookies.Address == undefined}
+              // disabled={address == "" || cookies.Address == undefined}
             >
               {cookies.startDT == undefined
                 ? "Choose Trip Dates"
@@ -81,7 +83,7 @@ export const HomePage = () => {
               onClick={() => navigate("/carsPage")}
               style={{ color: "white" }}
               disabled={
-                DateTime.sDateAndTime == "" || cookies.startDT == undefined
+                DateTime.sDateAndTime == "" || cookies.startDT == undefined && address == "" || cookies.Address == undefined
               }
             >
               FIND CARS
