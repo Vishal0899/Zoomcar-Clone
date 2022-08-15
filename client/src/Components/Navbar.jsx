@@ -143,7 +143,6 @@ function Hamburger({ Name, Email, Number, auth, city }) {
     removeCookie("userEmail");
     removeCookie("userNumber");
     removeCookie("auth");
-    // setCookie("auth", false);
     const payload = {
       Name: "",
       Email: "",
@@ -153,8 +152,6 @@ function Hamburger({ Name, Email, Number, auth, city }) {
     dispatch(logoutAction(payload));
   };
 
-  // console.log(cookies.auth);
-  // console.log(cookies.userName);
 
   return (
     <>
