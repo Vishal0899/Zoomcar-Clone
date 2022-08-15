@@ -150,7 +150,7 @@ function Hamburger({ Name, Email, Number, auth, city }) {
       Password: "",
     };
     dispatch(logoutAction(payload));
-    // window.location.reload();
+    window.location.reload();
   };
 
   return (
