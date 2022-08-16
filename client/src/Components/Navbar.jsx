@@ -41,7 +41,6 @@ import { useEffect } from "react";
 export const Navbar = () => {
   const [cookies, setCookie, removeCookie] = useCookies([]);
   const navigate = useNavigate();
-  // const authorise = useSelector((state) => state.AuthReducer.auth);
   const city = useSelector((state) => state.CCreducer.City);
   const { Name, Email, Number, auth } = useSelector(
     (state) => state.AuthReducer
@@ -342,7 +341,7 @@ function Hamburger({ Name, Email, Number, auth, city }) {
             </Box>
             <hr />
             <br />
-            <Box>
+            <Box onClick={handleLogout}>
               <Flex>
                 <MdLogout
                   style={{
@@ -351,7 +350,7 @@ function Hamburger({ Name, Email, Number, auth, city }) {
                     fontSize: "25px",
                   }}
                 />
-                <Box mt={"5px"} ml={"15px"} onClick={handleLogout}>
+                <Box mt={"5px"} ml={"15px"}>
                   Logout
                 </Box>
               </Flex>
