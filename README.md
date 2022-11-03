@@ -57,10 +57,6 @@ A solo project excuted in one week.
 
 
 
-<br />
-
-**Read more about the Zoomcar  on [the project homepage](https://en.wikipedia.org/wiki/pepperfry).**
-
 # 👨‍💻 Tech stack
 
 Here's a overview of the tech stack the pepperfry uses:
