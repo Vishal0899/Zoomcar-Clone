@@ -59,7 +59,7 @@ A solo project excuted in one week.
 
 <br />
 
-**Read more about the pepperfry  on [the project homepage](https://en.wikipedia.org/wiki/pepperfry).**
+**Read more about the Zoomcar  on [the project homepage](https://en.wikipedia.org/wiki/pepperfry).**
 
 # 👨‍💻 Tech stack
 
